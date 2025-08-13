@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SmartBill – Receipt Generator</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Optional: icons/font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <!-- PDF libs (for Download PDF) -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand">SmartBill</div>
+    <div class="subtitle">Web-Based Digital Receipt Generator</div>
+  </header>
+
+  <main class="container">
+    <!-- Customer / Receipt meta -->
+    <section class="card">
+      <h2>Customer & Receipt Details</h2>
+      <div class="grid">
+        <label>
+          Customer Name
+          <input id="customerName" type="text" placeholder="e.g., Ramesh Kumar" required />
+        </label>
+        <label>
+          Contact Number
+          <input id="customerPhone" type="tel" placeholder="e.g., 9876543210" required />
+        </label>
+        <label>
+          Receipt No.
+          <input id="receiptNo" type="text" placeholder="e.g., SB-0001" />
+        </label>
+        <label>
+          Date
+          <input id="receiptDate" type="date" />
+        </label>
+      </div>
+    </section>
+
+    <!-- Items table -->
+    <section class="card">
+      <div class="row-between">
+        <h2>Line Items</h2>
+        <button id="addRowBtn" class="btn">+ Add Item</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="items-table" id="itemsTable" aria-label="Items Table">
+          <thead>
+            <tr>
+              <th style="width: 28%">Item</th>
+              <th style="width: 12%">Qty</th>
+              <th style="width: 15%">Price</th>
+              <th style="width: 12%">Tax %</th>
+              <th style="width: 12%">Disc %</th>
+              <th style="width: 15%">Amount</th>
+              <th style="width: 6%"></th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody">
+            <!-- rows injected by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="row-end">
+        <button id="clearAllBtn" class="btn btn-ghost">Clear Items</button>
+      </div>
+    </section>
+
+    <!-- Totals & Actions -->
+    <section class="card totals-actions">
+      <div class="totals">
+        <div class="total-line"><span>Subtotal</span><span id="subtotal">₹0.00</span></div>
+        <div class="total-line"><span>Total Tax</span><span id="totalTax">₹0.00</span></div>
+        <div class="total-line"><span>Total Discount</span><span id="totalDiscount">− ₹0.00</span></div>
+        <div class="total-line grand"><span>Grand Total</span><span id="grandTotal">₹0.00</span></div>
+      </div>
+      <div class="actions">
+        <button id="generateBtn" class="btn">Generate Receipt</button>
+        <button id="downloadBtn" class="btn btn-primary">Download PDF</button>
+        <button id="printBtn" class="btn btn-ghost">Print</button>
+        <button id="resetBtn" class="btn btn-danger">Reset</button>
+      </div>
+      <p id="msg" class="msg" role="alert" aria-live="polite"></p>
+    </section>
+
+    <!-- Receipt Preview -->
+    <section class="card">
+      <h2>Receipt Preview</h2>
+      <div id="receipt" class="receipt">
+        <div class="receipt-header">
+          <div>
+            <div class="store-name">SmartBill Store</div>
+            <div class="store-sub">Paperless • Fast • Accurate</div>
+          </div>
+          <div class="receipt-meta">
+            <div><strong>Receipt #:</strong> <span id="rNo">—</span></div>
+            <div><strong>Date:</strong> <span id="rDate">—</span></div>
+          </div>
+        </div>
+
+        <div class="receipt-customer">
+          <div><strong>Customer:</strong> <span id="rCustomer">—</span></div>
+          <div><strong>Phone:</strong> <span id="rPhone">—</span></div>
+        </div>
+
+        <table class="receipt-table">
+          <thead>
+            <tr>
+              <th>Item</th>
+              <th>Qty</th>
+              <th>Price</th>
+              <th>Tax %</th>
+              <th>Disc %</th>
+              <th>Amount</th>
+            </tr>
+          </thead>
+          <tbody id="rItems">
+            <!-- filled on generate -->
+          </tbody>
+        </table>
+
+        <div class="receipt-totals">
+          <div><span>Subtotal</span><span id="rSubtotal">₹0.00</span></div>
+          <div><span>Tax</span><span id="rTax">₹0.00</span></div>
+          <div><span>Discount</span><span id="rDiscount">− ₹0.00</span></div>
+          <div class="grand"><span>Grand Total</span><span id="rGrand">₹0.00</span></div>
+        </div>
+
+        <div class="receipt-foot">
+          <p>Thank you for your purchase! This is a system-generated receipt.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="app-footer">©2024 all rights reserved by chandrika vulapu 😇 <span id="year"></span> SmartBill</footer>
+</body>
+</html>

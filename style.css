@@ -1,0 +1,107 @@
+:root{
+  --bg:#0f172a;           /* slate-900 */
+  --card:#111827;         /* gray-900 */
+  --muted:#94a3b8;        /* slate-400 */
+  --text:#e5e7eb;         /* gray-200 */
+  --line:#1f2937;         /* gray-800 */
+  --accent:#2563eb;       /* blue-600 */
+  --accent-2:#22c55e;     /* green-500 */
+  --danger:#ef4444;       /* red-500 */
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--text)}
+
+.app-header{
+  padding:20px 16px;border-bottom:1px solid var(--line);
+  display:flex;flex-direction:column;gap:4px;align-items:center;text-align:center
+}
+.brand{font-weight:700;font-size:20px;letter-spacing:.5px}
+.subtitle{color:var(--muted);font-size:14px}
+
+.container{max-width:1000px;margin:24px auto;padding:0 16px;display:flex;flex-direction:column;gap:16px}
+
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px
+}
+
+h2{margin:0 0 12px 0;font-size:18px}
+
+.grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:12px
+}
+label{display:flex;flex-direction:column;gap:6px;font-size:14px}
+input{
+  background:#0b1220;border:1px solid var(--line);color:var(--text);
+  padding:10px;border-radius:10px;outline:none
+}
+input::placeholder{color:#6b7280}
+
+.row-between{display:flex;justify-content:space-between;align-items:center}
+.row-end{display:flex;justify-content:flex-end}
+
+.btn{
+  background:#0b1220;border:1px solid var(--line);color:var(--text);
+  padding:10px 14px;border-radius:12px;cursor:pointer;transition:.2s;
+}
+.btn:hover{border-color:#374151;transform:translateY(-1px)}
+.btn-primary{background:var(--accent);border-color:var(--accent)}
+.btn-primary:hover{filter:brightness(1.1)}
+.btn-danger{background:var(--danger);border-color:var(--danger)}
+.btn-ghost{background:transparent;border-color:var(--line)}
+
+.table-wrapper{overflow:auto;border:1px solid var(--line);border-radius:12px}
+.items-table, .receipt-table{
+  width:100%;border-collapse:separate;border-spacing:0;min-width:720px
+}
+.items-table th, .items-table td,
+.receipt-table th, .receipt-table td{
+  border-bottom:1px solid var(--line);padding:10px;text-align:left;font-size:14px
+}
+.items-table th, .receipt-table th{color:var(--muted);font-weight:600}
+.items-table td:last-child{text-align:center}
+
+.num-input{
+  width:100%;background:#0b1220;border:1px solid var(--line);color:var(--text);
+  padding:8px;border-radius:8px;outline:none;text-align:right
+}
+.text-input{
+  width:100%;background:#0b1220;border:1px solid var(--line);color:var(--text);
+  padding:8px;border-radius:8px;outline:none
+}
+.remove-btn{
+  background:transparent;border:1px solid var(--line);color:#fb7185; /* rose-400 */
+  border-radius:10px;padding:6px 10px;cursor:pointer
+}
+.remove-btn:hover{border-color:#4b5563}
+
+.totals-actions{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.totals{
+  border:1px solid var(--line);border-radius:12px;padding:12px;max-width:420px
+}
+.total-line{display:flex;justify-content:space-between;padding:6px 0;color:var(--muted)}
+.total-line.grand{color:#fff;font-weight:700;border-top:1px dashed var(--line);margin-top:6px;padding-top:10px}
+
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.msg{margin:8px 0 0 0;color:var(--accent-2);min-height:20px}
+
+.receipt{
+  background:#0b1220;border:1px dashed var(--line);border-radius:12px;padding:16px
+}
+.receipt-header{
+  display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed var(--line);padding-bottom:10px;margin-bottom:10px
+}
+.store-name{font-weight:700}
+.store-sub{color:var(--muted);font-size:12px}
+.receipt-customer{display:flex;gap:24px;margin-bottom:8px;color:var(--muted)}
+.receipt-totals{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.receipt-totals > div{display:flex;justify-content:space-between;padding:4px 0}
+.receipt-totals .grand{font-weight:700;color:#fff}
+
+.app-footer{color:var(--muted);text-align:center;padding:18px 12px;border-top:1px solid var(--line);margin-top:24px}
+
+@media (max-width:700px){
+  .grid{grid-template-columns:1fr}
+  .totals-actions{grid-template-columns:1fr}
+  .receipt-customer{flex-direction:column;gap:6px}
+}
